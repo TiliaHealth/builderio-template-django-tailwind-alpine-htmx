@@ -1,4 +1,4 @@
-<div x-data="DatePicker()" x-init="[initDate(), getNoOfDays()]" x-cloak>
+<div x-data="DatePicker" x-init="initDate(); getNoOfDays(); selectedDate = $refs.date.value || ''" x-cloak>
   <div class="w-64">
     <div class="relative">
 
