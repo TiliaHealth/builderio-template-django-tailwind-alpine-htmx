@@ -1,27 +1,18 @@
-{% load webpack_loader static %}
+{% extends 'base.html' %} {% block content %}
+<div class="hero min-h-96 bg-base-200 rounded-lg">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold mb-8">
+        TailwindCSS + DaisyUI + AlpineJS + HTMX
+      </h1>
+      <p class="py-6">
+        Modern Django application using HTMX for dynamic interactions, AlpineJS
+        for lightweight reactivity, and TailwindCSS with DaisyUI for beautiful
+        styling.
+      </p>
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Index</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% stylesheet_pack 'app' %}
-</head>
-<body>
-
-{% include 'components/navbar.html' %}
-
-<div class="jumbotron py-5">
-  <div class="w-full max-w-7xl mx-auto px-4">
-      <h1 class="text-6xl mb-8">Tailwind CSS, Alpine.js, HTMX examples</h1>
-
-    {% include 'components/counter.html' %}
-
+      {% include 'components/counter.html' %}
+    </div>
   </div>
 </div>
-
-{% javascript_pack 'app' %}
-
-</body>
-</html>
+{% endblock content %}
