@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-q5nt1_!ri&y5$k$6vdb^pp-e1ob#zxf^2$(!+n#_%92&bdy$9r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DJANGO_DEBUG", default=1))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_tailwind",
 
-    'webpack_boilerplate',
+    
     'tasks',
 ]
 
@@ -55,6 +55,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Allow frames for cloud deployment
+X_FRAME_OPTIONS = 'ALLOWALL'
+
+# Trust proxy headers
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
 ROOT_URLCONF = 'django_tailwind_app.urls'
 
@@ -135,12 +142,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "frontend/build"),
+    os.path.join(BASE_DIR, "assets"),
 ]
-
-WEBPACK_LOADER = {
-    'MANIFEST_FILE': os.path.join(BASE_DIR, "frontend/build/manifest.json"),
-}
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
