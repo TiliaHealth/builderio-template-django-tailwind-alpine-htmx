@@ -1,5 +1,5 @@
-<div x-data="{ count: 0 }" class="flex items-center gap-4 mt-6">
-  <button class="btn btn-primary" @click="count++">Increment</button>
+<div x-data="Counter" class="flex items-center gap-4 mt-6">
+  <button class="btn btn-primary" @click="handleClick">Increment</button>
   <span class="text-3xl font-bold" x-text="count"></span>
   <button class="btn btn-secondary" @click="count--">Decrement</button>
   <button class="btn btn-outline" @click="count = 0">Reset</button>

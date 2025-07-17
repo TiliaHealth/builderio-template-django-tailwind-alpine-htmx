@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Django HTMX App - CDN Demo</title>
+
+    <!-- TailwindCSS + DaisyUI -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+
+    <!-- AlpineJS -->
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- Custom Components -->
+    <script src="assets/js/components.js"></script>
+  </head>
+  <body class="min-h-screen bg-base-100">
+    <!-- Navbar -->
+    <div class="navbar bg-base-200">
+      <div class="navbar-start">
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+            <svg
+              class="w-5 h-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </div>
+          <ul
+            tabindex="0"
+            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li><a href="#home">Home</a></li>
+            <li><a href="#tasks">Tasks</a></li>
+          </ul>
+        </div>
+        <a class="btn btn-ghost text-xl">Django HTMX App</a>
+      </div>
+      <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#tasks">Tasks</a></li>
+        </ul>
+      </div>
+      <div class="navbar-end">
+        <a class="btn">Login</a>
+      </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8">
+      <!-- Hero Section -->
+      <div class="hero min-h-96 bg-base-200 rounded-lg mb-8" id="home">
+        <div class="hero-content text-center">
+          <div class="max-w-md">
+            <h1 class="text-5xl font-bold mb-8">
+              TailwindCSS + DaisyUI + AlpineJS + HTMX
+            </h1>
+            <p class="py-6">
+              Modern Django application using HTMX for dynamic interactions,
+              AlpineJS for lightweight reactivity, and TailwindCSS with DaisyUI
+              for beautiful styling. Now converted to use CDN libraries!
+            </p>
+
+            <!-- Counter Component -->
+            <div x-data="Counter" class="flex items-center gap-4 mt-6">
+              <button class="btn btn-primary" @click="handleClick">
+                Increment
+              </button>
+              <span class="text-3xl font-bold" x-text="count"></span>
+              <button class="btn btn-secondary" @click="count--">
+                Decrement
+              </button>
+              <button class="btn btn-outline" @click="count = 0">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DatePicker Demo Section -->
+      <div class="card bg-base-100 shadow-xl mb-8" id="tasks">
+        <div class="card-body">
+          <h2 class="card-title text-2xl mb-4">Date Picker Demo</h2>
+          <p class="mb-4">
+            This demonstrates the converted DatePicker component:
+          </p>
+
+          <!-- DatePicker Component -->
+          <div
+            x-data="DatePicker"
+            x-init="initDate(); getNoOfDays(); selectedDate = ''"
+            x-cloak
+          >
+            <div class="w-64">
+              <div class="relative">
+                <input
+                  type="hidden"
+                  name="date"
+                  x-ref="date"
+                  :value="datepickerValue"
+                />
+                <input
+                  type="text"
+                  x-on:click="showDatepicker = !showDatepicker"
+                  x-model="datepickerValue"
+                  x-on:keydown.escape="showDatepicker = false"
+                  class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none text-gray-600 font-medium focus:ring focus:ring-blue-600 focus:ring-opacity-50"
+                  placeholder="Select date"
+                  readonly
+                />
+
+                <div class="absolute top-0 right-0 px-3 py-2">
+                  <svg
+                    class="h-6 w-6 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+
+                <div
+                  class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0 z-10"
+                  style="width: 17rem"
+                  x-show.transition="showDatepicker"
+                  @click.away="showDatepicker = false"
+                >
+                  <div class="flex justify-between items-center mb-2">
+                    <div>
+                      <span
+                        x-text="MONTH_NAMES[month]"
+                        class="text-lg font-bold text-gray-800"
+                      ></span>
+                      <span
+                        x-text="year"
+                        class="ml-1 text-lg text-gray-600 font-normal"
+                      ></span>
+                    </div>
+                    <div>
+                      <button
+                        type="button"
+                        class="focus:outline-none focus:shadow-outline transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-100 p-1 rounded-full"
+                        @click="decreaseDay"
+                      >
+                        <svg
+                          class="h-6 w-6 text-gray-400 inline-flex"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 19l-7-7 7-7"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        type="button"
+                        class="focus:outline-none focus:shadow-outline transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-100 p-1 rounded-full"
+                        @click="increaseDay()"
+                      >
+                        <svg
+                          class="h-6 w-6 text-gray-400 inline-flex"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap mb-3 -mx-1">
+                    <template x-for="(day, index) in DAYS" :key="index">
+                      <div style="width: 14.26%" class="px-0.5">
+                        <div
+                          x-text="day"
+                          class="text-gray-800 font-medium text-center text-xs"
+                        ></div>
+                      </div>
+                    </template>
+                  </div>
+
+                  <div class="flex flex-wrap -mx-1">
+                    <template x-for="blankday in blankdays">
+                      <div
+                        style="width: 14.28%"
+                        class="text-center border p-1 border-transparent text-sm"
+                      ></div>
+                    </template>
+                    <template
+                      x-for="(date, dateIndex) in no_of_days"
+                      :key="dateIndex"
+                    >
+                      <div style="width: 14.28%" class="px-1 mb-1">
+                        <div
+                          @click="getDateValue(date)"
+                          x-text="date"
+                          class="cursor-pointer text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100"
+                          :class="{
+                                'bg-blue-200': isToday(date),
+                                'text-gray-600 hover:bg-blue-200': !isToday(date) && !isSelectedDate(date),
+                                'bg-blue-500 text-white hover:bg-opacity-75': isSelectedDate(date)
+                                }"
+                        ></div>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Component Status -->
+      <div class="alert alert-success">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="stroke-current shrink-0 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span
+          >All components successfully converted from webpack modules to
+          CDN-based JavaScript!</span
+        >
+      </div>
+
+      <!-- Features List -->
+      <div class="stats stats-vertical lg:stats-horizontal shadow mt-8">
+        <div class="stat">
+          <div class="stat-title">Libraries</div>
+          <div class="stat-value text-primary">4</div>
+          <div class="stat-desc">All from CDN</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">Components</div>
+          <div class="stat-value text-secondary">5</div>
+          <div class="stat-desc">Converted to inline JS</div>
+        </div>
+        <div class="stat">
+          <div class="stat-title">Bundle Size</div>
+          <div class="stat-value">0MB</div>
+          <div class="stat-desc">No webpack needed</div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
