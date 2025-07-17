@@ -56,6 +56,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Allow frames for cloud deployment
+X_FRAME_OPTIONS = 'ALLOWALL'
+
+# Trust proxy headers
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
+
 ROOT_URLCONF = 'django_tailwind_app.urls'
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
