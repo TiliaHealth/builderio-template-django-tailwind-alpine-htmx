@@ -8,7 +8,7 @@
   </div>
 
   <div class="flex flex-wrap gap-4 justify-center">
-    <a href="{% url "task-create" %}" class="btn btn-primary">Create Task</a>
+        <a href="{% url 'task-create' %}" class="btn btn-primary">Create Task</a>
 
     <!-- Alpine.js ModalForm example -->
     <div x-data="ModalForm" x-cloak x-ref="modelForm" data-url="{% url "modal-task-create" %}">
