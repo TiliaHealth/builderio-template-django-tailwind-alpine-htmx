@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_tailwind",
 
-    'webpack_boilerplate',
+    
     'tasks',
 ]
 
@@ -135,12 +135,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "frontend/build"),
+    os.path.join(BASE_DIR, "static"),
 ]
-
-WEBPACK_LOADER = {
-    'MANIFEST_FILE': os.path.join(BASE_DIR, "frontend/build/manifest.json"),
-}
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
