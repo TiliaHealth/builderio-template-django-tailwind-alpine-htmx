@@ -3,3 +3,9 @@
 .DS_Store
 db.sqlite3
 /.idea/
+*.pdf
+*.log
+static/admin/
+*.png
+.gitignore
+node_modules/
