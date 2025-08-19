@@ -1,33 +1,22 @@
 <!doctype html>
+{% load tailwind_tags %}
 <html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Django HTMX App</title>
 
-    <!-- TailwindCSS + DaisyUI -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- TailwindCSS -->
+    {% tailwind_css %}
 
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-
-    <!-- Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 
     <!-- AlpineJS -->
     <script
       defer
       src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
-
-    <!-- Custom Components -->
-    {% load static %}
-    <script src="{% static 'js/components.js' %}"></script>
   </head>
   <body class="min-h-screen bg-base-100">
     {% include 'components/navbar.html' %}
